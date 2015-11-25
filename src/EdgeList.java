@@ -47,4 +47,17 @@ public class EdgeList {
 		
 	}
 
+	public boolean hasNext() {
+		if (head == null){
+		  	return false;
+		}
+		return true;
+	}
+
+	public String next() {
+		String name = head.name;
+		head = head.next;
+		return name;
+	}
+
 }
