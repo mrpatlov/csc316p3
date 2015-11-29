@@ -1,4 +1,4 @@
-
+import java.util.Arrays;
 
 /**
  * An Adjacency list form for a social network graph
@@ -10,10 +10,10 @@
  */
 public class Network {
 	
-	private VertexList verticies;
+	private VertexList vertices;
 	
 	public Network(){
-		verticies = new VertexList();
+		vertices = new VertexList();
 		
 	}
 	
@@ -38,14 +38,68 @@ public class Network {
 	}
 	/**
 	 * returns a list of items in shortest path between start and end
+	 * Implemented using BFS with arrays
 	 * @param start starting node
 	 * @param end ending node
-	 * @return list of verticies on shortest path
+	 * @return list of vertices on shortest path including start and end
 	 */
 	public EdgeList shortestPath(String start, String end){
+		//setup necessary placeholder data structures
+		String [] names = vertices.getNames();
+		int [] depth = new int[names.length];
+		Arrays.fill(depth, -1);
+		String [] previous = new String[names.length];
+		//populate while performing BFS
+		EdgeList currentConnections = vertices.getEdgeList(start);
+		int loc = indexOf(names, currentConnections.next());
+		depth[loc] = 0;
+		previous[loc] = "origin";
+		EdgeList bfsQueue = new EdgeList();
+		while (currentConnections.hasNext()) {
+			String nextName = currentConnections.next();
+			loc = indexOf(names, nextName);
+			if (depth[loc] == -1) {
+				depth[loc] = depth[indexOf(names, previous[loc])] + 1;
+				previous[loc] = start;
+				bfsQueue.add(nextName);
+			}
+		}
+		while (bfsQueue.hasNext()) {
+			String prevName = bfsQueue.next();
+			currentConnections = vertices.getEdgeList(prevName);
+			currentConnections.next();
+			while (currentConnections.hasNext()) {
+				String nextName = currentConnections.next();
+				loc = indexOf(names, nextName);
+				if (depth[loc] == -1) {
+					depth[loc] = depth[indexOf(names, previous[loc])] + 1;
+					previous[loc] = prevName;
+					bfsQueue.add(nextName);
+				}
+			}
+		}
+		//Use results of BFS to construct shortest path
 		EdgeList path = new EdgeList();
+		path.addFront(end);
+		loc = indexOf(names, end);
+		while (!previous[loc].equals("origin")) {
+			path.addFront(previous[loc]);
+			loc = indexOf(names, previous[loc]);
+		}
 		return path;
-
+	}
+	
+	/**
+	 * method to find the index of a given string in an array. Uses a simple linear search.
+	 * @param a array to search
+	 * @param target the String to search for
+	 * @return the index of the target string
+	 */
+	private int indexOf(String [] a, String target) {
+		for (int i = 0; i < a.length; i++) {
+			if (a[i].equals(target)) return i;
+		} 
+		return -1;
 	}
 	/**
 	 * tests for an edge between vert and connect
@@ -54,7 +108,7 @@ public class Network {
 	 * @return true if the edge exist false if not
 	 */
 	public Boolean isConnected(String vert, String connect){
-		EdgeList myVert = verticies.getEdgeList( vert );
+		EdgeList myVert = vertices.getEdgeList( vert );
 		if (myVert.includes(connect)){
 			return true;
 		}
@@ -79,7 +133,7 @@ public class Network {
 	 * @param name name of person adding to network
 	 */
 	public void addVertex(String name){
-		verticies.add(name);
+		vertices.add(name);
 	}
 	
 	/**
@@ -90,9 +144,9 @@ public class Network {
 	 * @param name2 second vertex on edge
 	 */
 	public void addConnection(String name1, String name2){
-		EdgeList temp = verticies.getEdgeList(name1);
+		EdgeList temp = vertices.getEdgeList(name1);
 		temp.add(name2);
-		temp = verticies.getEdgeList(name2);
+		temp = vertices.getEdgeList(name2);
 		temp.add(name1);
 	}
 }

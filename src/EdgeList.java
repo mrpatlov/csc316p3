@@ -44,7 +44,20 @@ public class EdgeList {
 
 	public void add(String name2) {
 		new Node (name2);
-		
+	}
+	
+	/**
+	 * adds a new person to the front of the list
+	 * @param newName the string to add
+	 */
+	public void addFront(String newName) {
+		if (head == null) {
+			head = new Node(newName);
+		} else {
+			Node oldHead = head;
+			head = new Node(newName);
+			head.next = oldHead;
+		}
 	}
 
 	public boolean hasNext() {

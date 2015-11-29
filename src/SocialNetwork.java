@@ -115,7 +115,7 @@ public class SocialNetwork {
 				input.close();
 				throw new Warning("relation needs two arguments");
 			}
-			EdgeList path = myNetwork.mostPopular();
+			EdgeList path = myNetwork.shortestPath(person, friend);
 			while (path.hasNext()){
 				System.out.println(path.next());
 			}
