@@ -18,12 +18,100 @@ public class Network {
 	}
 	
 	/**
-	 * the number of pairs of vertex that are not connected
+	 * the number of pairs of vertices that are not connected
 	 * @return
 	 */
 	public int notConnected(){
+		String [] names = vertices.getNames();
+		int [] components = new int[names.length];
+		int val = 0;
+		Arrays.fill(components, -1);
+		EdgeList tempEdg = new EdgeList();
+		VertexList tempVer = new VertexList();
+		EdgeList currentConnections = vertices.getEdgeList(names[0]);
+		tempVer.add(names[0]);
+		tempEdg.add(names[0]);
+		while(currentConnections.hasNext()){
+			String nextName = currentConnections.next();
+			if(!(tempEdg.includes(nextName))){
+				tempEdg.add(nextName);
+				val++;
+			}
+		}
+		while(tempEdg.hasNext()){
+			String tempName = tempEdg.next();
+			currentConnections = vertices.getEdgeList(tempName);
+			while(currentConnections.hasNext()){
+				String nextName = currentConnections.next();
+				if(!(tempEdg.includes(nextName))){
+					tempEdg.add(nextName);
+					val++;
+				}
+			}
+		}
+		while(tempEdg.hasNext()){
+			tempVer.add(tempEdg.next());
+		}
+		int iter = 0;
+		while(components[iter] != -1){
+			iter++;
+		}
+		components[iter] = val;
+		val = 0;
+		iter = 0;
+		while(iter < names.length){
+			if(!(tempVer.includes(names[iter]))){
+				currentConnections = vertices.getEdgeList(names[iter]);
+				tempVer.add(names[iter]);
+				tempEdg = new EdgeList();
+				tempEdg.add(names[iter]);
+				while(currentConnections.hasNext()){
+					String nextName = currentConnections.next();
+					if(!(tempEdg.includes(nextName))){
+						tempEdg.add(nextName);
+						val++;
+					}
+				}
+				while(tempEdg.hasNext()){
+					String tempName = tempEdg.next();
+					currentConnections = vertices.getEdgeList(tempName);
+					while(currentConnections.hasNext()){
+						String nextName = currentConnections.next();
+						if(!(tempEdg.includes(nextName))){
+							tempEdg.add(nextName);
+							val++;
+						}
+					}
+				}
+				while(tempEdg.hasNext()){
+					tempVer.add(tempEdg.next());
+				}
+				iter = 0;
+				while(components[iter] == -1){
+					iter++;
+				}
+				components[iter] = val;
+				iter = 0;
+			}
+		}
 		
-		return 1;
+		iter = 0;
+		while(components[iter] != -1){
+			iter++;
+		}
+		
+		if(iter == 0 || iter == 1){
+			return 0;
+		}
+		
+		int answer = 0;
+		for(int i = 0; i < (iter - 1); i++){
+			for(int j = (i + 1); j < iter; j++){
+				answer += (components[i]*components[j]);
+			}
+		}
+		
+		return answer;
 		
 	}
 	

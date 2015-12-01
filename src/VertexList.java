@@ -1,3 +1,5 @@
+import EdgeList.Node;
+
 
 public class VertexList {
 	
@@ -60,6 +62,17 @@ public class VertexList {
 		} else {
 			return 0;
 		}
+	}
+	
+	public boolean includes(String connect) {
+		Node temp = head.next;
+		while (temp != null){
+			if (temp.name.equals(connect)){
+				return true;
+			}
+			temp = temp.next;
+		}
+		return false;
 	}
 
 
