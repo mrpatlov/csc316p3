@@ -117,11 +117,32 @@ public class Network {
 	
 	/**
 	 * list of the most popular people
+	 * Loops through each vertex, grabbing the edge list of each one. 
+	 * Then counts how many edges that vertex has, and compares it to the max.
 	 * @return list of the most popular people
 	 */
 	public EdgeList mostPopular(){
-
 		EdgeList mostPopular = new EdgeList();
+		int length = vertices.size();
+		String names[] = vertices.getNames();
+		int max = 0;
+		int current = 0;
+		for(int i = 0; i < length; i++) {
+			EdgeList e = vertices.getEdgeList(names[i]);
+			while(e.hasNext()) {
+				current++;
+				e.next();
+			}
+			if(current > max) {
+				mostPopular = new EdgeList();
+				mostPopular.add(names[i]);
+			} else if(current == max) {
+				mostPopular.add(names[i]);
+			} else if(current < max) {
+				
+			}
+		}
+				
 		return mostPopular;
 	}
 	/**
