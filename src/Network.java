@@ -168,8 +168,8 @@ public class Network {
 			String nextName = currentConnections.next();
 			loc = indexOf(names, nextName);
 			if (depth[loc] == -1) {
-				depth[loc] = depth[indexOf(names, previous[loc])] + 1;
 				previous[loc] = start;
+				depth[loc] = depth[indexOf(names, previous[loc])] + 1;
 				bfsQueue.add(nextName);
 			}
 		}
@@ -181,8 +181,8 @@ public class Network {
 				String nextName = currentConnections.next();
 				loc = indexOf(names, nextName);
 				if (depth[loc] == -1) {
-					depth[loc] = depth[indexOf(names, previous[loc])] + 1;
 					previous[loc] = prevName;
+					depth[loc] = depth[indexOf(names, previous[loc])] + 1;
 					bfsQueue.add(nextName);
 				}
 			}
