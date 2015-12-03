@@ -14,8 +14,13 @@ public class SocialNetwork {
 	public static void main(String[] args) {
 		SocialNetwork myNetwork = new SocialNetwork();
 		
-		File input = new File(args[1]);
+		File input = new File(args[0]);
+		try{
 		myNetwork.readFile(input);
+		}
+		catch(Warning e){
+			
+		}
 		
 		Scanner console = new Scanner(System.in);
 		while (console.hasNextLine()){
@@ -128,23 +133,37 @@ public class SocialNetwork {
 		input.close();
 	}
 
-	private void readFile(File input) {
-		Scanner console;
+	private void readFile(File input) throws Warning {
 		try{
-			console = new Scanner(input);
+			Scanner console = new Scanner(input);
 			String name = console.next();
+			String name2 = "";
 			while (!name.equals("$")){
 				myNetwork.addVertex(name);
 				name = console.next();
 			}
-			while (console.hasNext()){
-				myNetwork.addConnection(console.next(), console.next());
+			while (console.hasNextLine()){
+				if (console.hasNext()){
+					name = console.next();
+				}
+				else{
+					throw new Warning("invalid input file");
+				}
+				if (console.hasNext()){
+					name2 = console.next();
+				}
+				else{
+					throw new Warning("invalid input file");
+				}
+				myNetwork.addConnection(name, name2);
 			}
+			console.close();
 		}
 		catch (FileNotFoundException exception){
 			System.out.println("Input file does not exist");
 			System.exit(0);
 		}
+
 		
 	}
 

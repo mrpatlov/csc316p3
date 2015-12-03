@@ -1,4 +1,3 @@
-import EdgeList.Node;
 
 
 public class VertexList {
@@ -30,10 +29,10 @@ public class VertexList {
 	public EdgeList getEdgeList(String vert) {
 		Node temp = head;
 		while (temp != null){
-			if (temp.name.head.equals(vert)){
+			if (temp.name.head.name.equals(vert)){
 				return temp.name;
 			} else {
-				temp = head.next;
+				temp = temp.next;
 			}
 		}
 		return null;
