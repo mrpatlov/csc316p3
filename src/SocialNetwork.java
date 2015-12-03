@@ -14,6 +14,7 @@ public class SocialNetwork {
 	public static void main(String[] args) {
 		if (args.length != 1) {
 			System.out.println("SocialNetwork: Proper Usage: java SocialNetwork inputfile");
+			System.exit(0);
 		}
 		SocialNetwork myNetwork = new SocialNetwork();
 		File input = new File(args[0]);

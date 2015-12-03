@@ -176,7 +176,6 @@ public class Network {
 		while (bfsQueue.hasNext()) {
 			String prevName = bfsQueue.next();
 			currentConnections = vertices.getEdgeList(prevName);
-			currentConnections.next();
 			while (currentConnections.hasNext()) {
 				String nextName = currentConnections.next();
 				loc = indexOf(names, nextName);

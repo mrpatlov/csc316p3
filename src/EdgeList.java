@@ -13,6 +13,11 @@ public class EdgeList {
 		this.head = null;
 		this.tail = null;
 	}
+	
+	public EdgeList(EdgeList master) {
+		this.head = master.head;
+		this.tail = master.tail;
+	}
 
 	class Node {
 		String name;
@@ -20,12 +25,9 @@ public class EdgeList {
 
 		public Node (String name){
 			this.name = name;
-			if (head == null){
+			this.next = null;
+			if (head == null) {
 				head = this;
-				tail = this;
-			}
-			else {
-				tail.next = this;
 				tail = this;
 			}
 		}
@@ -43,7 +45,9 @@ public class EdgeList {
 	}
 
 	public void add(String name2) {
-		new Node (name2);
+		
+		this.tail.next = new Node(name2);
+		this.tail = tail.next;
 	}
 	
 	/**
@@ -72,5 +76,4 @@ public class EdgeList {
 		head = head.next;
 		return name;
 	}
-
 }

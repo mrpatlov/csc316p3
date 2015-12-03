@@ -30,7 +30,7 @@ public class VertexList {
 		Node temp = head;
 		while (temp != null){
 			if (temp.name.head.name.equals(vert)){
-				return temp.name;
+				return new EdgeList(temp.name);
 			} else {
 				temp = temp.next;
 			}
