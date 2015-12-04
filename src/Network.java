@@ -28,22 +28,22 @@ public class Network {
 		Arrays.fill(components, -1);
 		EdgeList tempEdg = new EdgeList();
 		VertexList tempVer = new VertexList();
-		EdgeList currentConnections = vertices.getEdgeList(names[0]);
+		EdgeList currentConnections = vertices.readEdgeList(names[0]);
 		tempVer.add(names[0]);
 		tempEdg.add(names[0]);
 		while(currentConnections.hasNext()){
 			String nextName = currentConnections.next();
-			if(!(tempEdg.includes(nextName))){
+			if(!(tempEdg.contains(nextName))){
 				tempEdg.add(nextName);
 				val++;
 			}
 		}
 		while(tempEdg.hasNext()){
 			String tempName = tempEdg.next();
-			currentConnections = vertices.getEdgeList(tempName);
+			currentConnections = vertices.readEdgeList(tempName);
 			while(currentConnections.hasNext()){
 				String nextName = currentConnections.next();
-				if(!(tempEdg.includes(nextName))){
+				if(!(tempEdg.contains(nextName))){
 					tempEdg.add(nextName);
 					val++;
 				}
@@ -60,24 +60,24 @@ public class Network {
 		val = 0;
 		iter = 0;
 		while(iter < names.length){
-			if(!(tempVer.includes(names[iter]))){
-				currentConnections = vertices.getEdgeList(names[iter]);
+			if(!(tempVer.contains(names[iter]))){
+				currentConnections = vertices.readEdgeList(names[iter]);
 				tempVer.add(names[iter]);
 				tempEdg = new EdgeList();
 				tempEdg.add(names[iter]);
 				while(currentConnections.hasNext()){
 					String nextName = currentConnections.next();
-					if(!(tempEdg.includes(nextName))){
+					if(!(tempEdg.contains(nextName))){
 						tempEdg.add(nextName);
 						val++;
 					}
 				}
 				while(tempEdg.hasNext()){
 					String tempName = tempEdg.next();
-					currentConnections = vertices.getEdgeList(tempName);
+					currentConnections = vertices.readEdgeList(tempName);
 					while(currentConnections.hasNext()){
 						String nextName = currentConnections.next();
-						if(!(tempEdg.includes(nextName))){
+						if(!(tempEdg.contains(nextName))){
 							tempEdg.add(nextName);
 							val++;
 						}
@@ -218,8 +218,9 @@ public class Network {
 	 * @return true if the edge exist false if not
 	 */
 	public Boolean isConnected(String vert, String connect){
-		EdgeList myVert = vertices.getEdgeList( vert );
-		if (myVert.includes(connect)){
+		EdgeList myVert = vertices.readEdgeList( vert );
+		myVert.next();
+		if (myVert.contains(connect)){
 			return true;
 		}
 		return false;

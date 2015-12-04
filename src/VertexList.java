@@ -75,8 +75,8 @@ public class VertexList {
 		}
 	}
 	
-	public boolean includes(String connect) {
-		Node temp = head.next;
+	public boolean contains(String connect) {
+		Node temp = head;
 		while (temp != null){
 			if (temp.name.equals(connect)){
 				return true;

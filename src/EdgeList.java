@@ -23,17 +23,6 @@ public class EdgeList {
 			this.next = null;
 		}
 	}
-
-	public boolean includes(String connect) {
-		Node temp = head.next;
-		while (temp != null) {
-			if (temp.name.equals(connect)) {
-				return true;
-			}
-			temp = temp.next;
-		}
-		return false;
-	}
 	
 	public boolean contains(String target) {
 		Node temp = head;
