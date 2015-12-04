@@ -18,7 +18,7 @@ public class EdgeList {
 		String name;
 		Node next;
 
-		public Node (String name){
+		public Node (String name) {
 			this.name = name;
 			this.next = null;
 		}
@@ -26,8 +26,8 @@ public class EdgeList {
 
 	public boolean includes(String connect) {
 		Node temp = head.next;
-		while (temp != null){
-			if (temp.name.equals(connect)){
+		while (temp != null) {
+			if (temp.name.equals(connect)) {
 				return true;
 			}
 			temp = temp.next;

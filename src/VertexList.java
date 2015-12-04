@@ -30,8 +30,19 @@ public class VertexList {
 		Node temp = head;
 		while (temp != null){
 			if (temp.name.head.name.equals(vert)){
-				EdgeList targetList = new EdgeList();
-				
+				return temp.name;
+			} else {
+				temp = temp.next;
+			}
+		}
+		return null;
+	}
+	
+	public EdgeList readEdgeList(String vert) {
+		Node temp = head;
+		while (temp != null){
+			if (temp.name.head.name.equals(vert)){
+				return temp.name.copyOf();
 			} else {
 				temp = temp.next;
 			}

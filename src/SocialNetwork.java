@@ -24,7 +24,7 @@ public class SocialNetwork {
 		catch(Warning e){
 			
 		}
-		
+		System.out.println("$");
 		Scanner console = new Scanner(System.in);
 		while (console.hasNextLine()){
 			try{
@@ -124,8 +124,12 @@ public class SocialNetwork {
 				throw new Warning("relation needs two arguments");
 			}
 			EdgeList path = myNetwork.shortestPath(person, friend);
-			while (path.hasNext()){
-				System.out.println(path.next());
+			if (path == null) {
+				System.out.println("$");
+			} else {
+				while (path.hasNext()){
+					System.out.println(path.next());
+				}
 			}
 		}
 		else{

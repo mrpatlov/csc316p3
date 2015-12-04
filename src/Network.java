@@ -159,7 +159,7 @@ public class Network {
 		Arrays.fill(depth, -1);
 		String [] previous = new String[names.length];
 		//populate while performing BFS
-		EdgeList currentConnections = vertices.getEdgeList(start);
+		EdgeList currentConnections = vertices.readEdgeList(start);
 		int loc = indexOf(names, currentConnections.next());
 		depth[loc] = 0;
 		previous[loc] = "origin";
@@ -175,7 +175,7 @@ public class Network {
 		}
 		while (bfsQueue.hasNext()) {
 			String prevName = bfsQueue.next();
-			currentConnections = vertices.getEdgeList(prevName);
+			currentConnections = vertices.readEdgeList(prevName);
 			while (currentConnections.hasNext()) {
 				String nextName = currentConnections.next();
 				loc = indexOf(names, nextName);
@@ -190,9 +190,11 @@ public class Network {
 		EdgeList path = new EdgeList();
 		path.addFront(end);
 		loc = indexOf(names, end);
+		if (previous[loc] == null) return null;
 		while (!previous[loc].equals("origin")) {
 			path.addFront(previous[loc]);
 			loc = indexOf(names, previous[loc]);
+			if (previous[loc] == null) return null;
 		}
 		return path;
 	}
@@ -231,6 +233,16 @@ public class Network {
 	 */
 	public EdgeList mutualConnections(String vertex1, String vertex2){
 		EdgeList connections = new EdgeList();
+		EdgeList first = vertices.readEdgeList(vertex1);
+		first.next();
+		EdgeList second = vertices.readEdgeList(vertex2);
+		second.next();
+		while (first.hasNext()) {
+			String current = first.next();
+			if (second.includes(current)) {
+				connections.add(current);
+			}
+		}
 		return connections;
 
 	}
