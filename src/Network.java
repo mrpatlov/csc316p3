@@ -239,7 +239,7 @@ public class Network {
 		second.next();
 		while (first.hasNext()) {
 			String current = first.next();
-			if (second.includes(current)) {
+			if (second.contains(current)) {
 				connections.add(current);
 			}
 		}

@@ -34,6 +34,17 @@ public class EdgeList {
 		}
 		return false;
 	}
+	
+	public boolean contains(String target) {
+		Node temp = head;
+		while (temp != null) {
+			if (temp.name.equals(target)) {
+				return true;
+			}
+			temp = temp.next;
+		}
+		return false;
+	}
 
 	public void add(String newName) {
 		Node addThis = new Node(newName);
