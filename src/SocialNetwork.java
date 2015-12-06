@@ -119,7 +119,7 @@ public class SocialNetwork {
 			}
 		}
 		else if ( command.equalsIgnoreCase("popular")){
-			EdgeList mostPopular = myNetwork.mostPopularAlt();
+			EdgeList mostPopular = myNetwork.mostPopular();
 			while (mostPopular.hasNext()){
 				System.out.println(mostPopular.next());
 			}
