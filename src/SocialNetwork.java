@@ -55,7 +55,7 @@ public class SocialNetwork {
 		
 		//process command
 		if (command.equals("notconnected")){
-			int notconnected = myNetwork.notConnected();
+			int notconnected = myNetwork.notConnected2();
 			System.out.println(notconnected);
 		}
 		else if (command.equals("isfriend")){
@@ -64,14 +64,14 @@ public class SocialNetwork {
 			}
 			else{
 				input.close();
-				throw new Warning("noconnected needs two arguments");
+				throw new Warning("isfriend needs two arguments");
 			}
 			if (input.hasNext()){
 				friend = input.next();
 			}
 			else{
 				input.close();
-				throw new Warning("noconnected needs two arguments");
+				throw new Warning("isfriend needs two arguments");
 			}
 			if (myNetwork.isConnected(person, friend)){
 				System.out.println("yes");

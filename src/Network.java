@@ -18,6 +18,28 @@ public class Network {
 	}
 	
 	/**
+	 * this calculates the number of pairs of verticies that are
+	 * not connected using an inefficient nieve method
+	 * @return the number of un connected pairs of verticies
+	 */
+	public int notConnected2(){
+		//all the names in the vertex list
+		String [] names = vertices.getNames();
+		//running tally of non-connections
+		int notConnected = 0;
+		for (int i = 0; i < names.length; i++){ //for each name in the list
+			for (int j = 0; j < names.length; j++){ //test against every other name in the list
+				if (shortestPath(names[i], names[j]) == null){  //if no path exists
+					notConnected++;
+				}
+			}
+		}
+		//if "a" and "b" are not connected both a->b and b->a
+		//don't exist and have been counted, meaning all non connections are
+		//double counted.  divide by two to fix
+		return notConnected/2;
+	}
+	/**
 	 * the number of pairs of vertices that are not connected
 	 * @return
 	 */
