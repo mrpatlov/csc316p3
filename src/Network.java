@@ -153,7 +153,7 @@ public class Network {
 		//length of vertex list
 		int length = vertices.size();
 		
-		//an array holding all the names in the vetex list
+		//an array holding all the names in the vertex list
 		String names[] = vertices.getNames();
 		//number of friends
 		int friends[] = new int[names.length];
@@ -164,7 +164,7 @@ public class Network {
 		for(int i = 0; i < length; i++) {
 			//make a copy of the edge list
 			EdgeList e = this.vertices.getEdgeList(names[i]).copyOf();
-			//make a list of all this verticies friends
+			//make a list of all this vertex's friends
 			EdgeList myFriends = new EdgeList();
 			int depth = 1;
 			//first element in edge list is vertex, so discard
@@ -227,6 +227,63 @@ public class Network {
 			}
 		}
 				
+		return mostPopular;
+	}
+	
+	public EdgeList mostPopularAlt() {
+		String [] names = vertices.getNames();
+		//number of friends
+		int [] friends = new int[names.length];
+		//total distance to friends
+		int [] distance = new int[names.length];
+		double [] popularity = new double[names.length];
+		for (int i = 0; i < names.length; i++) {
+			//setup necessary placeholder data structures
+			int [] depth = new int[names.length];
+			Arrays.fill(depth, -1);
+			String [] previous = new String[names.length];
+			//populate while performing BFS
+			EdgeList currentConnections = vertices.readEdgeList(names[i]);
+			int loc = indexOf(names, currentConnections.next());
+			depth[loc] = 0;
+			previous[loc] = "origin";
+			EdgeList bfsQueue = new EdgeList();
+			while (currentConnections.hasNext()) {
+				String nextName = currentConnections.next();
+				loc = indexOf(names, nextName);
+				if (depth[loc] == -1) {
+					previous[loc] = names[i];
+					depth[loc] = depth[indexOf(names, previous[loc])] + 1;
+					bfsQueue.add(nextName);
+					friends[i]++;
+					distance[i] += depth[loc];
+				}
+			}
+			while (bfsQueue.hasNext()) {
+				String prevName = bfsQueue.next();
+				currentConnections = vertices.readEdgeList(prevName);
+				while (currentConnections.hasNext()) {
+					String nextName = currentConnections.next();
+					loc = indexOf(names, nextName);
+					if (depth[loc] == -1) {
+						previous[loc] = prevName;
+						depth[loc] = depth[indexOf(names, previous[loc])] + 1;
+						bfsQueue.add(nextName);
+						friends[i]++;
+						distance[i] += depth[loc];
+					}
+				}
+			}
+			popularity[i] = (double)friends[i]/(double)distance[i];
+		}
+		EdgeList mostPopular = new EdgeList();
+		double highPop = -1;
+		for(int i = 0; i < popularity.length; i++) {
+			if (popularity[i] > highPop) highPop = popularity[i];
+		}
+		for(int i = 0; i < popularity.length; i++) {
+			if (popularity[i] == highPop) mostPopular.add(names[i]);
+		}
 		return mostPopular;
 	}
 	/**
