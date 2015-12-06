@@ -5,7 +5,10 @@ import java.util.Arrays;
  * 
  * Note:efficancy can be strongly improved by sorting the lists after entries added then
  * using bianary searchs for Verticies rather than iterators.
- * @author Jeremy
+ * @author Jeremy Vanderwall
+ * @author John Parsons
+ * @author Alex Micklow
+ * @author Michael Patlovich
  *
  */
 public class Network {

@@ -1,19 +1,39 @@
-
+/**
+ * class defining edgelist objects (queue) for use in the SocialNetwork program
+ * 
+ * @author Jeremy Vanderwall
+ * @author John Parsons
+ *
+ */
 public class EdgeList {
 	
 	Node head;
 	Node tail;
 	
+	/**
+	 * Primary constructor of EdgeList objects
+	 * @param name the string of data to be held as the first item in the list
+	 */
 	public EdgeList (String name) {
 		head = new Node (name);
 		tail = head;
 	}
 	
+	/**
+	 * blank constructor of EdgeList objects. Sets all fields to null
+	 */
 	public EdgeList() {
 		this.head = null;
 		this.tail = null;
 	}
 
+	/**
+	 * Inner node class used in EdgeLists
+	 * 
+	 * @author Jeremy Vanderwall
+	 * @author John Parsons
+	 *
+	 */
 	class Node {
 		String name;
 		Node next;
@@ -24,6 +44,11 @@ public class EdgeList {
 		}
 	}
 	
+	/**
+	 * determines if an EdgeList object contains a value equal to the target string.
+	 * @param target the string to search for
+	 * @return true if the target is found
+	 */
 	public boolean contains(String target) {
 		Node temp = head;
 		while (temp != null) {
@@ -35,6 +60,10 @@ public class EdgeList {
 		return false;
 	}
 
+	/**
+	 * Adds a new person to the rear of the list.
+	 * @param newName the string to add
+	 */
 	public void add(String newName) {
 		Node addThis = new Node(newName);
 		if (head == null) {
@@ -60,6 +89,10 @@ public class EdgeList {
 		}
 	}
 
+	/**
+	 * determines if the list has at least one more value in it
+	 * @return true if there is another item in the list
+	 */
 	public boolean hasNext() {
 		if (head == null){
 		  	return false;
@@ -67,12 +100,20 @@ public class EdgeList {
 		return true;
 	}
 
+	/**
+	 * removes and returns the string at the head of the list
+	 * @return the first item in the list
+	 */
 	public String next() {
 		String name = head.name;
 		head = head.next;
 		return name;
 	}
 	
+	/**
+	 * Performs a deep copy of the EdgeList and returns the result
+	 * @return the copy
+	 */
 	public EdgeList copyOf() {
 		EdgeList newList = new EdgeList();
 		if (head == null) {

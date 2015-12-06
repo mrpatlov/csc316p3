@@ -1,10 +1,19 @@
 
-
+/**
+ * class defining VertexList objects (graph) for use in the SocialNetwork program
+ * @author Jeremy Vanderwall
+ *
+ */
 public class VertexList {
 	
 	Node head;
 	Node tail;
 	
+	/**
+	 * inner node class used in VertexLists. Contains an EdgeList
+	 * @author Jeremy Vanderwall
+	 *
+	 */
 	class Node {
 		EdgeList name;
 		Node next;
@@ -21,11 +30,20 @@ public class VertexList {
 		}
 	}
 
+	/**
+	 * adds a new EdgeList to the rear of the VertexList
+	 * @param name the name of the person to add to the front of the new EdgeList
+	 */
 	public void add(String name) {
 		new Node (name);
 		
 	}
 
+	/**
+	 * returns a shallow copy of the EdgeList that begins with the given name
+	 * @param vert the name of the person to look for
+	 * @return the EdgeList that contains adjacency info for the given person
+	 */
 	public EdgeList getEdgeList(String vert) {
 		Node temp = head;
 		while (temp != null){
@@ -38,6 +56,11 @@ public class VertexList {
 		return null;
 	}
 	
+	/**
+	 * returns a deep copy of the EdgeList that begins with the given name
+	 * @param vert the name of the person to look for
+	 * @return the EdgeList that contains adjacency info for the given person
+	 */
 	public EdgeList readEdgeList(String vert) {
 		Node temp = head;
 		while (temp != null){
@@ -50,6 +73,10 @@ public class VertexList {
 		return null;
 	}
 	
+	/**
+	 * returns an array containing all the names in the system
+	 * @return the array of names
+	 */
 	public String [] getNames() {
 		String [] names = new String[size()];
 		Node iter = head;
@@ -62,7 +89,7 @@ public class VertexList {
 	
 	/**
 	 * size of vertex list
-	 * @return number of vertcies in list
+	 * @return number of vertices in list
 	 */
 	public int size() {
 		int size;
@@ -79,6 +106,11 @@ public class VertexList {
 		}
 	}
 	
+	/**
+	 * Searches the VertexList for the given name
+	 * @param connect the name to search for
+	 * @return true if the name is found
+	 */
 	public boolean contains(String connect) {
 		Node temp = head;
 		while (temp != null){

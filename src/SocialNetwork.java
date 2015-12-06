@@ -2,15 +2,27 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-
+/**
+ * Main entry class for social network program.
+ * 
+ * @author Jeremy Vanderwall
+ *
+ */
 public class SocialNetwork {
 	
 	Network myNetwork;
 	
+	/**
+	 * Constructor for SocialNetwork objects
+	 */
 	public SocialNetwork(){
 		myNetwork = new Network();
 	}
 
+	/**
+	 * Main method. Requires a single command line argument: the input filename containing graph structure
+	 * @param args command line arguments
+	 */
 	public static void main(String[] args) {
 		if (args.length != 1) {
 			System.out.println("SocialNetwork: Proper Usage: java SocialNetwork inputfile");
@@ -38,6 +50,11 @@ public class SocialNetwork {
 
 	}
 
+	/**
+	 * verifies input and calls the appropriate methods to handle it.
+	 * @param nextLine the line of input containing the command as well as the arguments separated by whitespace
+	 * @throws Warning
+	 */
 	private void processCommand(String nextLine) throws Warning{
 		Scanner input = new Scanner(nextLine);
 		String command = "";
@@ -124,9 +141,7 @@ public class SocialNetwork {
 				throw new Warning("relation needs two arguments");
 			}
 			EdgeList path = myNetwork.shortestPath(person, friend);
-			if (path == null) {
-				System.out.println("$");
-			} else {
+			if (path != null) {
 				while (path.hasNext()){
 					System.out.println(path.next());
 				}
@@ -140,6 +155,11 @@ public class SocialNetwork {
 		input.close();
 	}
 
+	/**
+	 * reads the structure file provided at program initialization and fills the graph
+	 * @param input the filename containing the graph structure
+	 * @throws Warning
+	 */
 	private void readFile(File input) throws Warning {
 		try{
 			Scanner console = new Scanner(input);
