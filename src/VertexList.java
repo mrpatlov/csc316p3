@@ -60,6 +60,10 @@ public class VertexList {
 		return names;
 	}
 	
+	/**
+	 * size of vertex list
+	 * @return number of vertcies in list
+	 */
 	public int size() {
 		int size;
 		if (head != null) {

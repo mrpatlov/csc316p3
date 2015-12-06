@@ -1,0 +1,120 @@
+Execution of my solution on the large test cases. The solution is roughly 1000 lines of code including all comments and could be simplified even further (currently there are separate classes for Queue, LinkedList, and Stack).
+
+$ for file in n_*.txt; do
+> base=`basename ${file#n_} .txt`
+> echo "------------- $file ----------------"
+> time java SocialNetwork $file < c_${base}.in > /dev/null
+> echo "----------------------------------------"
+> echo
+> done
+------------- n_00125_00250.txt ----------------
+num_components = 6
+
+real	0m0.412s
+user	0m0.322s
+sys	0m0.031s
+----------------------------------------
+
+------------- n_00125_00500.txt ----------------
+num_components = 1
+
+real	0m0.212s
+user	0m0.414s
+sys	0m0.029s
+----------------------------------------
+
+------------- n_00125_01000.txt ----------------
+num_components = 1
+
+real	0m0.235s
+user	0m0.503s
+sys	0m0.026s
+----------------------------------------
+
+------------- n_00125_07500.txt ----------------
+num_components = 1
+
+real	0m2.645s
+user	0m4.064s
+sys	0m0.230s
+----------------------------------------
+
+------------- n_00250_00500.txt ----------------
+num_components = 6
+
+real	0m0.270s
+user	0m0.579s
+sys	0m0.034s
+----------------------------------------
+
+------------- n_00250_01000.txt ----------------
+num_components = 1
+
+real	0m0.331s
+user	0m0.712s
+sys	0m0.035s
+----------------------------------------
+
+------------- n_00500_01000.txt ----------------
+num_components = 8
+
+real	0m0.632s
+user	0m1.111s
+sys	0m0.034s
+----------------------------------------
+
+------------- n_00500_02000.txt ----------------
+num_components = 1
+
+real	0m0.728s
+user	0m1.299s
+sys	0m0.054s
+----------------------------------------
+
+------------- n_01000_02000.txt ----------------
+num_components = 12
+
+real	0m3.220s
+user	0m3.813s
+sys	0m0.048s
+----------------------------------------
+
+------------- n_01000_04000.txt ----------------
+num_components = 1
+
+real	0m3.365s
+user	0m4.031s
+sys	0m0.077s
+----------------------------------------
+
+------------- n_02000_04000.txt ----------------
+num_components = 42
+
+real	0m27.018s
+user	0m27.772s
+sys	0m0.071s
+----------------------------------------
+
+------------- n_02000_08000.txt ----------------
+num_components = 1
+
+real	0m28.064s
+user	0m28.954s
+sys	0m0.062s
+----------------------------------------
+
+------------- n_04000_08000.txt ----------------
+num_components = 86
+
+real	4m39.458s
+user	4m40.518s
+sys	0m0.169s
+----------------------------------------
+
+------------- n_04000_16000.txt ----------------
+num_components = 1
+
+real	4m52.944s
+user	4m54.228s
+sys	0m0.217s
+----------------------------------------

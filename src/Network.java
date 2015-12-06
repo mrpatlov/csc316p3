@@ -122,24 +122,83 @@ public class Network {
 	 * @return list of the most popular people
 	 */
 	public EdgeList mostPopular(){
+		//this is the list of the most popular people
 		EdgeList mostPopular = new EdgeList();
+		
+		//length of vertex list
 		int length = vertices.size();
+		
+		//an array holding all the names in the vetex list
 		String names[] = vertices.getNames();
-		int max = 0;
-		int current = 0;
+		//number of friends
+		int friends[] = new int[names.length];
+		//total distance to friends
+		int distance[] = new int[names.length];
+				
+		//calculate the popularity for each vertex
 		for(int i = 0; i < length; i++) {
-			EdgeList e = vertices.getEdgeList(names[i]);
-			while(e.hasNext()) {
-				current++;
-				e.next();
+			//make a copy of the edge list
+			EdgeList e = this.vertices.getEdgeList(names[i]).copyOf();
+			//make a list of all this verticies friends
+			EdgeList myFriends = new EdgeList();
+			int depth = 1;
+			//first element in edge list is vertex, so discard
+			e.next();
+			
+			//add all direct connections to myFriends list
+			while (e.hasNext()){
+				//add friend to list
+				myFriends.add(e.next());
+				//increment friend count
+				friends[i]++;
+				//add appropriate distance
+				distance[i] += depth;
 			}
-			if(current > max) {
+			
+			//now friends of friends need to added
+			boolean finished = false;
+			while (!finished){
+				//make a destructable copy of friends list
+				EdgeList friendsTemp = myFriends.copyOf();
+				finished = true;
+				//each itteration of this loop is one step futher removed, so
+				//depth needs to be incremented
+				depth++;
+				//itterate over all friends to add more
+				while( friendsTemp.hasNext()){
+					EdgeList friendsFriends = this.vertices.getEdgeList(friendsTemp.next()).copyOf();
+					while (friendsFriends.hasNext()){
+						String name = friendsFriends.next();
+						if (myFriends.contains(name)){
+							//do nothing if name is already in list
+						}
+						else{
+							//add the friend
+							myFriends.add(name);
+							//increment friend count
+							friends[i]++;
+							//add appropriate distance
+							distance[i] += depth;
+							//added a friend so more connections my be found
+							finished = false;
+						}
+					}
+					
+				}
+				
+			}
+		}
+		
+		//a properly populated keyed list for verticies with paired lists for friends and distance
+		//now exist  It is time to calculate most popular and populate the list
+		float max = 0;
+		for (int i = 0; i < length; i++){
+			if ((float)friends[i]/distance[i] > max){
 				mostPopular = new EdgeList();
 				mostPopular.add(names[i]);
-			} else if(current == max) {
+				max = (float)friends[i]/distance[i];
+			}else if ((float)friends[i]/distance[i] == max){
 				mostPopular.add(names[i]);
-			} else if(current < max) {
-				
 			}
 		}
 				
