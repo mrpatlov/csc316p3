@@ -197,8 +197,14 @@ public class Network {
 		for(int i = 0; i < popularity.length; i++) {
 			if (popularity[i] > highPop) highPop = popularity[i];
 		}
-		for(int i = 0; i < popularity.length; i++) {
-			if (popularity[i] == highPop) mostPopular.add(names[i]);
+		if (highPop == -1.0) {
+			for(int i = 0; i < popularity.length; i++) {
+				mostPopular.add(names[i]);
+			}
+		} else {
+			for(int i = 0; i < popularity.length; i++) {
+				if (popularity[i] == highPop) mostPopular.add(names[i]);
+			}
 		}
 		return mostPopular;
 	}

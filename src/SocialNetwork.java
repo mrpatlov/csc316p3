@@ -67,7 +67,8 @@ public class SocialNetwork {
 		}
 		else {
 			input.close();
-			throw new Warning("No Command found");
+			return;
+		//	throw new Warning("No Command Found");
 		}
 		
 		//process command
@@ -149,7 +150,7 @@ public class SocialNetwork {
 		}
 		else{
 			input.close();
-			throw new Warning("Invald command");
+			throw new Warning("Invalid command");
 		}
 		System.out.println("$");
 		input.close();
