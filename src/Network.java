@@ -4,11 +4,7 @@ import java.util.Arrays;
  * An Adjacency list form for a social network graph
  * 
  * Note:efficancy can be strongly improved by sorting the lists after entries added then
- * using bianary searchs for Verticies rather than iterators.
- * @author Jeremy Vanderwall
- * @author John Parsons
- * @author Alex Micklow
- * @author Michael Patlovich
+ * using bianary searchs for Verticies rather than iterators
  *
  */
 public class Network {
