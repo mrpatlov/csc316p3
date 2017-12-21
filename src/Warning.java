@@ -1,6 +1,6 @@
 /**
  * class defining the warning exception used in the SocialNetwork program
- *
+ *Took contributors names out for identity purposes
  */
 @SuppressWarnings("serial")
 public class Warning extends Exception {
