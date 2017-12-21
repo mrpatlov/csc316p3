@@ -1,6 +1,5 @@
 /**
  * class defining the warning exception used in the SocialNetwork program
- * @author Jeremy Vanderwall
  *
  */
 @SuppressWarnings("serial")
