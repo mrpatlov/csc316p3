@@ -1,7 +1,6 @@
 
 /**
  * class defining VertexList objects (graph) for use in the SocialNetwork program
- * @author Jeremy Vanderwall
  *
  */
 public class VertexList {
