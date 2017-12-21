@@ -1,8 +1,5 @@
 /**
  * class defining edgelist objects (queue) for use in the SocialNetwork program
- * 
- * @author Jeremy Vanderwall
- * @author John Parsons
  *
  */
 public class EdgeList {
