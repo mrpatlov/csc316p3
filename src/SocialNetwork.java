@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 /**
  * Main entry class for social network program.
- * 
- * @author Jeremy Vanderwall
  *
  */
 public class SocialNetwork {
