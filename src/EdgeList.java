@@ -1,6 +1,6 @@
 /**
  * class defining edgelist objects (queue) for use in the SocialNetwork program
- *
+ *Took contributors names out for identity purposes
  */
 public class EdgeList {
 	
