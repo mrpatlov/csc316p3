@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * Main entry class for social network program.
- *
+ *Took contributors names out for identity purposes
  */
 public class SocialNetwork {
 	
